@@ -1,0 +1,40 @@
+.movie-item {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    cursor: pointer;
+    padding: 20px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .movie-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 25px; 
+  }
+  
+  .movie-title h2 {
+    margin: 0;
+    font-size: 18px;
+  }
+  
+  .wishlist-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  .sticky-button {
+    position: fixed;
+    bottom: 5px; 
+    left: 0;
+    right: 0;
+    z-index: 1000; 
+    margin-left: 500px;
+    margin-right: 500px;
+  }
+
+  
+  

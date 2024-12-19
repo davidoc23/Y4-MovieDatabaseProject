@@ -1,0 +1,102 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Movie Categories</ion-title>
+    <ion-select [(ngModel)]="selectedNavigation" (ionChange)="onNavigationChange()" interface="popover" slot="end">
+      <ion-select-option value="home">Go to Homepage</ion-select-option>
+      <ion-select-option value="wishlist">Go to Wishlist</ion-select-option>
+    </ion-select>
+  </ion-toolbar>
+  <ion-item>
+    <ion-button expand="full" (click)="logout()">Logout</ion-button>
+  </ion-item>
+</ion-header>
+
+<ion-content>
+
+  <!-- Dropdown Menu for Selecting Movie Category -->
+  <ion-item>
+    <ion-label> </ion-label>
+    <ion-select [(ngModel)]="selectedMovieType" (ionChange)="fetchMovies()">
+      <ion-select-option value="all">All Movies</ion-select-option>
+      <ion-select-option value="popular">Popular Movies</ion-select-option>
+      <ion-select-option value="trending">Trending Movies</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <!--Allow the user to select film most popular, with the highest votes or vote count-->
+  <ion-item>
+    <ion-label> </ion-label>
+    <ion-select [(ngModel)]="selectedSortCriteria" (ionChange)="sortMovies()">
+      <ion-select-option value="popularity">Popularity</ion-select-option>
+      <ion-select-option value="vote_average">Average Votes</ion-select-option>
+      <ion-select-option value="vote_count">Total Vote Count</ion-select-option>
+    </ion-select>
+  </ion-item>
+  
+  
+
+  <!-- Search Bar to Filter Movies -->
+  <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="filterMovies()" debounce="500"  showCancelButton="focus" placeholder="Search movies..."></ion-searchbar>
+
+  <!-- Button to Add Selected Movies to Watchlist (Sticky) -->
+  <ion-button expand="full" color="primary" (click)="addSelectedToWatchlist()" class="sticky-button">Add Selected to Watchlist</ion-button>
+
+    <!-- Input for Movie Recommendations Based on User Query -->
+      <!-- Search Bar for Movie Recommendations -->
+      <ion-searchbar 
+        [(ngModel)]="userQuery" 
+        (ionInput)="getMovieRecommendations()" 
+        debounce="500" 
+        placeholder="Ask AI for movie recommendations..."
+        animated
+        showCancelButton="focus"
+      ></ion-searchbar>
+    
+      <!-- Loading Spinner -->
+      <ion-loading
+        *ngIf="isLoading"
+        message="Loading recommendations..."
+        spinner="crescent"
+      ></ion-loading>
+    
+      <!-- Display AI Recommended Movies -->
+      <div *ngIf="aiRecommendations.length > 0">
+        <h3>AI Recommended Movies</h3>
+        <ion-list>
+          <ion-item *ngFor="let recommendation of aiRecommendations">
+            <ion-label>
+              <h2>{{ recommendation.title }}</h2>
+              <p>{{ recommendation.description }}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
+
+  <!-- Display Movie List, Including Recommendations -->
+  <div *ngFor="let movie of filteredMovies">
+    <ion-item (click)="openMovieModal(movie)">
+      <ion-thumbnail slot="start">
+        <img [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" alt="{{ movie.title }}">
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ movie.title }}</h2>
+      </ion-label>
+    </ion-item>
+
+    <!-- Checkbox Area (Separate from Movie Clickable Area) -->
+    <ion-item lines="none">
+      <ion-checkbox 
+        [(ngModel)]="movie.selected" 
+        (ionChange)="onMovieCheckboxChange(movie, $event.detail.checked)" 
+        slot="start">
+      </ion-checkbox>
+      <ion-label>Select for Wishlist</ion-label>
+    </ion-item>
+  </div>
+
+  <!-- Sticky "Add Selected to Watchlist" Button (Always Visible) -->
+  <ion-button expand="full" color="primary" (click)="addSelectedToWatchlist()" class="sticky-button">
+    Add Selected to Watchlist
+  </ion-button>
+
+</ion-content>

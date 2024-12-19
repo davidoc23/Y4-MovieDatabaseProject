@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Wishlist</ion-title>
+    <ion-select [(ngModel)]="selectedNavigation" (ionChange)="onNavigationChange()" interface="popover" slot="end">
+      <ion-select-option value="home">Go to Homepage</ion-select-option>
+      <ion-select-option value="movies">Go to Movies</ion-select-option>
+    </ion-select>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Remove All Button -->
+  <ion-button expand="full" color="danger" (click)="confirmRemoveAll()" class="remove-all-button" class="sticky-button">
+    <ion-icon slot="start" name="trash"></ion-icon> Remove All
+  </ion-button>
+
+  <!-- Display the wishlist -->
+  <div *ngFor="let movie of wishlist; let i = index">
+    <ion-card>
+      <img class="movie-image" [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" alt="{{ movie.title }}">
+      <ion-card-header>
+        <ion-card-title>{{ movie.title }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{ movie.overview }}</p>
+        <p>Release Date: {{ movie.release_date | date:'longDate' }}</p>
+      </ion-card-content>
+      
+      <!-- Remove movie from wishlist with styled button -->
+      <ion-button 
+        (click)="confirmRemove(movie)" 
+        fill="solid" 
+        color="danger" 
+        shape="round"  
+        size="small"
+        class="remove-button">
+        <ion-icon slot="start"></ion-icon> Remove
+      </ion-button>
+    </ion-card>
+  </div>
+</ion-content>

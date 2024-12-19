@@ -1,0 +1,8 @@
+.modal-image {
+    width: 300px;         /* Set the width to 300px */
+    height: 300px;        /* Set the height to 300px */
+    object-fit: contain;  /* Ensures the full image is visible without cropping */
+    display: block;       /* Ensures proper alignment */
+    margin: 0 auto;       /* Centers the image horizontally */
+  }
+  

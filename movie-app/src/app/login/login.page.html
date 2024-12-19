@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input
+          type="email"
+          [(ngModel)]="email"
+          required
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input
+          type="password"
+          [(ngModel)]="password"
+          required
+        ></ion-input>
+      </ion-item>
+
+      <!-- Login Button -->
+      <ion-button expand="block" (click)="login()">Login</ion-button>
+
+      <!-- Sign Up Button -->
+      <ion-button expand="block" fill="clear" (click)="goToSignup()">Sign Up</ion-button>
+      <ion-footer>
+        <ion-button expand="full" (click)="goToPasswordReset()">Forgot Password?</ion-button>
+      </ion-footer>
+      
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,28 @@
+.remove-button {
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+    width: 25%;
+  }
+  
+  .remove-button:hover {
+    background-color: #e53935;  /* Darker red shade when hovered */
+  }
+
+  .movie-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 25px;
+    margin-right: 25px; // Space between image and title
+  }
+
+  .sticky-button {
+    position: fixed;
+    bottom: 5px; 
+    left: 0;
+    right: 0;
+    z-index: 1000; 
+    margin-left: 500px;
+    margin-right: 500px;
+  }
+  
